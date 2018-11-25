@@ -6,11 +6,9 @@ if(!$_SESSION['logged_in']) {
     die();
 }
 
-
-if ($_SESSION['logged_in'] = true){
-    echo $_SESSION['name'];
-
-}
+//if ($_SESSION['logged_in'] = true){
+//    echo $_SESSION['name'];
+//}
 
 //when the user wants to logout it will destroy the session
 if (isset($_GET['logout']) && intval($_GET['logout']) == 1){
@@ -34,8 +32,78 @@ if (isset($_GET['logout']) && intval($_GET['logout']) == 1){
 </head>
 <body>
     <div class="container">
-        <a type="submit" href="main.php?logout=1" class="btn btn-danger float-right">Logout</a>
+
+        <div class="top-panel">
+            <a type="submit" href="main.php?logout=1" class="btn btn-danger float-right mb-3">Logout</a>
+        </div>
+
+        <div class="row mb-5">
+            <button type="button" class="btn btn-primary mr-2">In Voice</button>
+            <button type="button" class="btn btn-secondary mr-2">Journal</button>
+            <button type="button" class="btn btn-success mr-2">Inventory</button>
+            <button type="button" class="btn btn-warning mr-2">Data Analysis</button>
+
+            <button type="button" class="btn btn-danger dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                Report
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
+                <a class="dropdown-item" href="#">In Voice</a>
+                <a class="dropdown-item" href="#">Balance Sheet</a>
+                <a class="dropdown-item" href="#">Income Statement</a>
+            </div>
+
+        </div>
+
+        <h3 class="text-center">In Voice</h3>
+
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Quantity</th>
+                <th scope="col">Item</th>
+                <th scope="col">Description</th>
+                <th scope="col">Unit Price</th>
+                <th scope="col">Tax (15%)</th>
+                <th scope="col">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr id="input_row">
+                <td scope="row"><input type="number" id="quantity" min="1" value="1" /></td>
+                <td><input type="text" id="item" /></td>
+                <td><input type="text" id="description" /></td>
+                <td><input type="number" id="unit_price" min="1" value="1" /></td>
+                <td id="tax"></td>
+                <td id="total"></td>
+                <td class="text-center"><button type="button" class="btn" id="view_btn">View</button></td>
+            </tr>
+
+            </tbody>
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Subtotal</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col" id="subtotal"></th>
+            </tr>
+            </thead>
+        </table>
+
+
+        <button id="add_item" class="btn btn-primary">Add Item</button>
+        <button id="insert-more" class="btn btn-danger">Discount(%)</button>
+
+
     </div>
+
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+
 </body>
 </html>
 

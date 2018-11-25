@@ -3,6 +3,14 @@ session_start();
 include_once 'config.php';
 include_once 'functions.php';
 
+//if the user is already logged in then redirect to the main page
+if (isset($_SESSION['logged_in'])){
+    if($_SESSION['logged_in']) {
+        header("location:main.php");
+        die();
+    }
+}
+
 $user_name = $password = '';
 
 //necessary array for the messages
@@ -38,7 +46,7 @@ if (isset($_POST['submit']) && (intval($_POST['submit']) == 1)) {
 //        var_dump($_SESSION);
 //        var_dump($success_messages);
         $output['success_messages'] = $success_messages;
-        print_r($_SESSION);
+        echo $output['success_messages'];
     }
 
 
@@ -54,7 +62,7 @@ if (isset($_POST['submit']) && (intval($_POST['submit']) == 1)) {
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-<!--    <link rel="stylesheet" href="login_form.css">-->
+<!--    <link rel="stylesheet" href="css/login_form.css">-->
 
     <title>Login</title>
 </head>
@@ -78,7 +86,7 @@ if (isset($_POST['submit']) && (intval($_POST['submit']) == 1)) {
                 </div>
 
                 <div class="forgot">
-                    <a href="reset.html">Forgot password?</a>
+<!--                    <a href="reset.html">Forgot password?</a>-->
                 </div>
 
                 <button type="submit" name="submit" value="1" class="btn btn-primary">Login</button>

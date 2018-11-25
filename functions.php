@@ -2,6 +2,12 @@
 
 class All_function{
 
+    /**
+     * check the login condition and if valid then proceed for the main page.
+     * @param $user_name
+     * @param $password
+     * @return array|string
+     */
     public function login_validation($user_name, $password){
 
         global $conn_oop;
@@ -9,7 +15,6 @@ class All_function{
         $error_messages = array();
 
         $sql = "SELECT * FROM users WHERE user_name='$user_name' AND password=MD5('$password')";
-//        $sql = "SELECT * FROM users WHERE user_name='$user_name' AND password=('$password')";
         $result = $conn_oop->query($sql);
         if ($result->num_rows > 0) {
             $_SESSION['logged_in'] = true;
@@ -23,8 +28,7 @@ class All_function{
             return $success_messages;
         }
         else{
-            return 'not logged in';
+            return 'check your username and password again.';
         }
-//        return '';
     }
 }
