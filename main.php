@@ -40,7 +40,7 @@ if (isset($_GET['logout']) && intval($_GET['logout']) == 1){
         <div class="row mb-5">
             <button type="button" class="btn btn-primary mr-2">In Voice</button>
             <button type="button" class="btn btn-secondary mr-2">Journal</button>
-            <button type="button" class="btn btn-success mr-2">Inventory</button>
+            <a type="button" href="inventory.php" class="btn btn-success mr-2">Inventory</a>
             <button type="button" class="btn btn-warning mr-2">Data Analysis</button>
 
             <button type="button" class="btn btn-danger dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
