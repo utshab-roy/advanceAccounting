@@ -76,6 +76,7 @@ class All_function{
     public function add_inventory($product_id, $quantity, $item, $unit_price, $discount){
         global $conn_oop;
         $prev_quantity = $prev_tax = $prev_total = '';
+        $current_quentity = $quantity;
 
         $sql = "SELECT * FROM inventory WHERE product_id='$product_id'";
         $result = $conn_oop->query($sql);
@@ -88,7 +89,9 @@ class All_function{
             }
             $price  = $quantity * $unit_price;
             $tax    = 15 * $price / 100;
+            $current_tax = $tax;
             $total  = $price + $tax - $discount;
+            $current_total = $total;
 
             $quantity   = $quantity + $prev_quantity;
             $tax        = $tax + $prev_tax;
@@ -98,7 +101,13 @@ class All_function{
             $sql = "UPDATE inventory SET product_id='$product_id', quantity='$quantity', item='$item', unit_price='$unit_price', tax='$tax', total='$total' WHERE product_id='$product_id'";
 
             if ($conn_oop->query($sql) === TRUE) {
-                return "New inventory added successfully";
+                //for inventory report insertion to the inventory_report database
+                $sql = "INSERT INTO inventory_report (product_id, quantity, item, unit_price, tax, discount, total) VALUES ('$product_id', '$current_quentity', '$item', '$unit_price', '$current_tax', $discount, '$current_total')";
+                if ($conn_oop->query($sql) === TRUE) {
+                    return "New inventory added successfully";
+                }else {
+                    return "Error: " . $sql . "<br>" . $conn_oop->error;
+                }
             } else {
                 return "Error: " . $sql . "<br>" . $conn_oop->error;
             }
@@ -112,7 +121,13 @@ class All_function{
             $sql = "INSERT INTO inventory (product_id, quantity, item, unit_price, tax, total) VALUES ('$product_id', '$quantity', '$item', '$unit_price', '$tax', '$total')";
 
             if ($conn_oop->query($sql) === TRUE) {
-                return "New inventory added successfully";
+                //for inventory report insertion to the inventory_report database
+                $sql = "INSERT INTO inventory_report (product_id, quantity, item, unit_price, tax, discount, total) VALUES ('$product_id', '$current_quentity', '$item', '$unit_price', '$tax', $discount, '$total')";
+                if ($conn_oop->query($sql) === TRUE) {
+                    return "New inventory added successfully";
+                }else {
+                    return "Error: " . $sql . "<br>" . $conn_oop->error;
+                }
             } else {
                 return "Error: " . $sql . "<br>" . $conn_oop->error;
             }
