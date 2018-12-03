@@ -93,7 +93,7 @@ if (isset($_POST['add_inventory']) && intval($_POST['add_inventory']) == 1) {
         header("location: inventory.php");
     }
 
-}//end of inventory add block
+} //end of inventory add block
 
 ?>
 
@@ -116,8 +116,8 @@ if (isset($_POST['add_inventory']) && intval($_POST['add_inventory']) == 1) {
 
     <nav>
         <div class="row mb-5">
-            <button type="button" class="btn btn-primary mr-2">In Voice</button>
-            <button type="button" class="btn btn-secondary mr-2">Journal</button>
+            <a type="button" href="main.php" class="btn btn-primary mr-2">In Voice</a>
+            <a type="button" href="journal.php" class="btn btn-secondary mr-2">Journal</a>
             <a type="button" href="inventory.php" class="btn btn-success mr-2">Inventory</a>
             <button type="button" class="btn btn-warning mr-2">Data Analysis</button>
 
@@ -178,7 +178,7 @@ if (isset($_POST['add_inventory']) && intval($_POST['add_inventory']) == 1) {
                 </div>
             </form>
 
-            <h6>Tax: <span id="tax_amount"></span></h6>
+            <h6>Tax(15%): <span id="tax_amount"></span></h6>
             <h6>Total Price: <span id="total"></span></h6>
         </div>
 

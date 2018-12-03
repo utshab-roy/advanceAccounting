@@ -9,6 +9,12 @@ if (!$_SESSION['logged_in']) {
     die();
 }
 
+//showing the session message if exists
+if (isset($_SESSION['message'])) {
+    echo $_SESSION['message'];
+    unset($_SESSION['message']);
+}
+
 ?>
 
 <!doctype html>
@@ -28,8 +34,8 @@ if (!$_SESSION['logged_in']) {
 
     <nav>
         <div class="row mb-5">
-            <button type="button" class="btn btn-primary mr-2">In Voice</button>
-            <button type="button" class="btn btn-secondary mr-2">Journal</button>
+            <a type="button" href="main.php" class="btn btn-primary mr-2">In Voice</a>
+            <a type="button" href="journal.php" class="btn btn-secondary mr-2">Journal</a>
             <a type="button" href="inventory.php" class="btn btn-success mr-2">Inventory</a>
             <button type="button" class="btn btn-warning mr-2">Data Analysis</button>
 
@@ -55,7 +61,7 @@ if (!$_SESSION['logged_in']) {
             <th scope="col">Quantity</th>
             <th scope="col">Item</th>
             <th scope="col">Unit_price</th>
-            <th scope="col">Tax</th>
+            <th scope="col">Tax(15%)</th>
             <th scope="col">Discount</th>
             <th scope="col">Total</th>
         </tr>

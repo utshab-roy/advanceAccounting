@@ -133,6 +133,29 @@ class All_function{
             }
         }
 
-    }
+    } //end of add_inventory function
+
+
+    public function add_invoice($product_id, $quantity, $item, $payment, $unit_price, $discount, $customer_name, $customer_address, $customer_phone){
+        global $conn_oop;
+
+        $price = $unit_price * $quantity;
+        $tax = $price * 15 / 100;
+        $total = $price + $tax - $discount;
+
+        $sql = "INSERT INTO invoice (product_id, quantity, item, payment, unit_price, tax, discount, total, customer_name, customer_address, customer_phone) VALUES ('$product_id', '$quantity', '$item', '$payment', '$unit_price', '$tax', '$discount', '$total', '$customer_name', '$customer_address', '$customer_phone')";
+
+        if ($conn_oop->query($sql) === TRUE) {
+            $sql = "INSERT INTO journal (product_id, journal, reference, account, debit, credit) VALUES ('$product_id', '$item', '$customer_phone', '$payment', '$price', '$price')";
+
+            if ($conn_oop->query($sql) === TRUE) {
+                return "Invoice and Journal added successfully";
+            }else {
+                return "Error: " . $sql . "<br>" . $conn_oop->error;
+            }
+        } else {
+            return "Error: " . $sql . "<br>" . $conn_oop->error;
+        }
+    } //end of add_invoice function
 
 }//end of All_function class
