@@ -114,6 +114,8 @@ if (isset($_SESSION['message'])) {
             </tbody>
         </table>
 
+        <a href="print_journal.php" target='_blank' class="btn btn-primary float-right" id="print_journal">Print Journal</a>
+
     </div>
 
     <script src="js/jquery-3.3.1.min.js"></script>
