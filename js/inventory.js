@@ -2,6 +2,7 @@
 jQuery(document).ready(function ($) {
     console.log('hit inventory.js file');
 
+    $('.js-example-basic-single').select2();
     function showValues() {
         var form_values = $('form#inventory_form').serializeArray();
         // console.log(form_values);

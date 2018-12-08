@@ -90,7 +90,9 @@ class All_function{
             $price  = $quantity * $unit_price;
             $tax    = 15 * $price / 100;
             $current_tax = $tax;
-            $total  = $price + $tax - $discount;
+            $total  = $price + $tax;
+            $discount = $discount * $total / 100;
+            $total = $total - $discount;
             $current_total = $total;
 
             $quantity   = $quantity + $prev_quantity;
@@ -116,7 +118,9 @@ class All_function{
         }else{//for the first time execution
             $price  = $quantity * $unit_price;
             $tax    = 15 * $price / 100;
-            $total  = $price + $tax - $discount;
+            $total  = $price + $tax;
+            $discount = $discount * $total / 100;
+            $total = $total - $discount;
 
             $sql = "INSERT INTO inventory (product_id, quantity, item, unit_price, tax, total) VALUES ('$product_id', '$quantity', '$item', '$unit_price', '$tax', '$total')";
 
@@ -141,7 +145,9 @@ class All_function{
 
         $price = $unit_price * $quantity;
         $tax = $price * 15 / 100;
-        $total = $price + $tax - $discount;
+        $total = $price + $tax;
+        $discount = $discount * $total / 100;
+        $total = $total - $discount;
 
         $sql = "INSERT INTO invoice (product_id, quantity, item, payment, unit_price, tax, discount, total, customer_name, customer_address, customer_phone) VALUES ('$product_id', '$quantity', '$item', '$payment', '$unit_price', '$tax', '$discount', '$total', '$customer_name', '$customer_address', '$customer_phone')";
 

@@ -33,7 +33,7 @@ if (isset($_SESSION['message'])) {
 
         <nav>
             <div class="row mb-5">
-                <a type="button" href="main.php" class="btn btn-primary mr-2">In Voice</a>
+                <a type="button" href="main.php" class="btn btn-primary mr-2">Invoice</a>
                 <a type="button" href="journal.php" class="btn btn-secondary mr-2">Journal</a>
                 <a type="button" href="inventory.php" class="btn btn-success mr-2">Inventory</a>
                 <button type="button" class="btn btn-warning mr-2">Data Analysis</button>
@@ -119,8 +119,12 @@ if (isset($_SESSION['message'])) {
     </div>
 
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
     <!--    <script src="js/main.js"></script>-->
 </body>
 </html>

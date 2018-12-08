@@ -26,17 +26,17 @@ if (isset($_SESSION['message'])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
           integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous"/>
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <title>Inventory Report</title>
 </head>
 <body>
 <div class="container">
-
     <nav>
         <div class="row mb-5">
-            <a type="button" href="main.php" class="btn btn-primary mr-2">In Voice</a>
-            <a type="button" href="journal.php" class="btn btn-secondary mr-2">Journal</a>
-            <a type="button" href="inventory.php" class="btn btn-success mr-2">Inventory</a>
+            <a type="button" href="main.php" class="btn btn-primary mr-2"><i class="fas fa-file-invoice"></i>In Voice</a>
+            <a type="button" href="journal.php" class="btn btn-secondary mr-2"><i class="fas fa-journal-whills"></i>Journal</a>
+            <a type="button" href="inventory.php" class="btn btn-success mr-2"><i class="fas fa-indent"></i>Inventory</a>
+
             <button type="button" class="btn btn-warning mr-2">Data Analysis</button>
 
             <button type="button" class="btn btn-danger dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown"
@@ -56,7 +56,7 @@ if (isset($_SESSION['message'])) {
     <table class="table">
         <thead class="thead-dark">
         <tr>
-            <th scope="col">Date & Time</th>
+            <th scope="col" class="text-center">Date & Time</th>
             <th scope="col">Product_id</th>
             <th scope="col">Quantity</th>
             <th scope="col">Item</th>
@@ -72,11 +72,18 @@ if (isset($_SESSION['message'])) {
         $sql = "SELECT * FROM inventory_report";
         $result = $conn_oop->query($sql);
 
+        //this array is used for the chart value
+        $chart = [];
+
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
+
+                //for the chart value
+                $chart[$row["product_id"]] = $row["quantity"];
+
                 echo '<tr>';
-                echo '<th scope="row">' . $row["date"] . '</th>';
+                echo '<th scope="row" class="text-center">' . $row["date"] . '</th>';
                 echo '<td scope="row">' . $row["product_id"] . '</td>';
                 echo '<td scope="row">' . $row["quantity"] . '</td>';
                 echo '<td scope="row">' . $row["item"] . '</td>';
@@ -96,6 +103,7 @@ if (isset($_SESSION['message'])) {
 
     <a href="print_inventory.php" target='_blank' class="btn btn-primary float-right" id="print_inventory">Print Inventory</a>
 
+    <canvas id="myChart"></canvas>
 </div>
 
 <script src="js/jquery-3.3.1.min.js"></script>
@@ -105,5 +113,43 @@ if (isset($_SESSION['message'])) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<!--<script src="js/inventory_report.js"></script>-->
+
+<script>
+    //fires the script after the dom ready
+    jQuery(document).ready(function ($) {
+        var jArray = <?php echo json_encode($chart); ?>;
+       // console.log(jArray);
+       var product_id = [];
+       var quantity = [];
+
+       $.each(jArray, function(key, value) {
+           // console.log(key+ ':' + value);
+           product_id.push(key);
+           quantity.push(value);
+       });
+
+       var ctx = document.getElementById('myChart').getContext('2d');
+       var chart = new Chart(ctx, {
+           // The type of chart we want to create
+           type: 'bar',
+           // The data for our dataset
+           data: {
+               labels: product_id,
+               datasets: [{
+                   label: "Stock in Inventory",
+                   backgroundColor: 'rgb(255, 99, 132)',
+                   borderColor: 'rgb(255, 99, 132)',
+                   data: quantity,
+               }]
+           },
+
+           // Configuration options go here
+           options: {}
+       });
+   });//end of document ready function
+</script>
+
 </body>
 </html>

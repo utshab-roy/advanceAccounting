@@ -124,6 +124,7 @@ if (isset($_POST['submit']) && intval($_POST['submit']) == 1) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
     <title>Main Page</title>
 </head>
@@ -137,7 +138,7 @@ if (isset($_POST['submit']) && intval($_POST['submit']) == 1) {
 
         <nav>
             <div class="row mb-5">
-                <a type="button" href="main.php" class="btn btn-primary mr-2">In Voice</a>
+                <a type="button" href="main.php" class="btn btn-primary mr-2">Invoice</a>
                 <a type="button" href="journal.php" class="btn btn-secondary mr-2">Journal</a>
                 <a type="button" href="inventory.php" class="btn btn-success mr-2">Inventory</a>
                 <button type="button" class="btn btn-warning mr-2">Data Analysis</button>
@@ -165,16 +166,16 @@ if (isset($_POST['submit']) && intval($_POST['submit']) == 1) {
                             <th scope="col">Quantity</th>
                             <th scope="col">Item</th>
                             <th scope="col">unit_price</th>
-                            <th scope="col">Tax</th>
-                            <th scope="col">Total</th>
+<!--                            <th scope="col">Tax</th>-->
+<!--                            <th scope="col">Total</th>-->
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>
                                 <div class="form-group">
-                                    <select name="product_id" id="product_id" class="">
-                                        <option value="">Select product</option>
+                                    <select name="product_id" id="product_id" class="js-example-basic-single">
+                                        <option value="">Product</option>
                                         <?php
                                         //creating the object
                                         $func = new All_function();
@@ -191,15 +192,15 @@ if (isset($_POST['submit']) && intval($_POST['submit']) == 1) {
                             <td><input type="number" class="form-control" id="quantity" name="quantity"></td>
                             <td><input type="text" class="form-control" id="item" name="item"></td>
                             <td><input type="number" class="form-control" id="unit_price" name="unit_price"></td>
-                            <td id="tax"></td>
-                            <td id="total"></td>
+<!--                            <td id="tax"></td>-->
+<!--                            <td id="total"></td>-->
                         </tr>
                         </tbody>
                     </table>
 
                     <div class="form-group">
-                        <label for="discount">Discount:</label>
-                        <input type="number" class="form-control" id="discount" name="discount" min="0" value="0">
+                        <label for="discount">Discount(if applicable in %):</label>
+                        <input type="number" class="form-control" id="discount" name="discount" min="0" max="100" value="0">
                     </div>
 
                     <div class="form-group">
@@ -245,9 +246,14 @@ if (isset($_POST['submit']) && intval($_POST['submit']) == 1) {
     </div>
 
     <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<!--    <script src="js/main.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+        <script src="js/main.js"></script>
 </body>
 </html>
 

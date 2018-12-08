@@ -108,6 +108,8 @@ if (isset($_POST['add_inventory']) && intval($_POST['add_inventory']) == 1) {
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
           integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <title>Inventort</title>
 </head>
@@ -116,9 +118,9 @@ if (isset($_POST['add_inventory']) && intval($_POST['add_inventory']) == 1) {
 
     <nav>
         <div class="row mb-5">
-            <a type="button" href="main.php" class="btn btn-primary mr-2">In Voice</a>
+            <a type="button" href="inventory.php" class="btn btn-success mr-2" >Inventory</a>
+            <a type="button" href="main.php" class="btn btn-primary mr-2">Invoice</a>
             <a type="button" href="journal.php" class="btn btn-secondary mr-2">Journal</a>
-            <a type="button" href="inventory.php" class="btn btn-success mr-2">Inventory</a>
             <button type="button" class="btn btn-warning mr-2">Data Analysis</button>
 
             <button type="button" class="btn btn-danger dropdown-toggle" id="dropdownMenuOffset" data-toggle="dropdown"
@@ -136,11 +138,11 @@ if (isset($_POST['add_inventory']) && intval($_POST['add_inventory']) == 1) {
 
     <div class="row">
         <div class="add_inventory col-8">
-            <h3>Add to the inventory</h3>
+            <h3>add a new product</h3>
             <form action="" method="POST" id="inventory_form">
                 <div class="form-group">
-                    <label for="dropdown_product_id">Select Product ID:</label>
-                    <select name="dropdown_product_id" id="dropdown_product_id" class="dropdown">
+<!--                    <label for="dropdown_product_id">Select Product ID:</label>-->
+                    <select name="dropdown_product_id" id="dropdown_product_id" class="js-example-basic-single" style="width: 50%">
                         <option value="">Select the product</option>
                         <?php
                         //creating the object
@@ -159,7 +161,7 @@ if (isset($_POST['add_inventory']) && intval($_POST['add_inventory']) == 1) {
                 </div>
 
                 <div class="form-group">
-                    <label for="item">Item:</label>
+                    <label for="item">Description:</label>
                     <input type="text" class="form-control" id="item" name="item">
                 </div>
 
@@ -169,8 +171,8 @@ if (isset($_POST['add_inventory']) && intval($_POST['add_inventory']) == 1) {
                 </div>
 
                 <div class="form-group">
-                    <label for="discount">Discount Amount:</label>
-                    <input type="number" step="0.01" min="0" class="form-control" id="discount" name="discount">
+                    <label for="discount">Discount Amount(if applicable in %):</label>
+                    <input type="number" step="0.01" min="0" max="100" class="form-control" id="discount" name="discount">
                 </div>
 
                 <div class="form-group">
@@ -212,6 +214,9 @@ if (isset($_POST['add_inventory']) && intval($_POST['add_inventory']) == 1) {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="js/main.js"></script>
 
 <script src="js/inventory.js"></script>
 </body>
